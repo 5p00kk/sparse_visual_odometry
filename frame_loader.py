@@ -7,9 +7,10 @@ class FrameLoader():
     
     def get_frame(self):
         ret, frame = self.cap.read()
-        assert ret
-        self.frame_num += 1
-        return frame
+        if ret:
+            self.frame_num += 1
+        
+        return ret, frame
 
     def close(self):
         self.cap.release()
