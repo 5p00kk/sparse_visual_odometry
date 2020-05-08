@@ -12,7 +12,7 @@ Simple implementation of sparse visual odometry.
 
 ## Authors
 
-* **Szymon Kowalewski** - *-* - [PurpleBooth](https://github.com/szymonkowalewski)
+* **Szymon Kowalewski** - *-* - [szymonkowalewski](https://github.com/szymonkowalewski)
 
 ## License
 
