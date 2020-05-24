@@ -2,9 +2,13 @@ import cv2
 import numpy as np
 
 class FeatureExtractor():
-    def __init__(self, type):
-        if type == "orb":
-            self.extractor = cv2.ORB_create()
+    def __init__(self, extractor_type, nfeatures_per_cell=100, patch_size=32):
+        if extractor_type == "orb":
+            self.patch_size = patch_size
+            self.extractor = cv2.ORB_create(nfeatures=nfeatures_per_cell,
+                                            edgeThreshold=patch_size,
+                                            patchSize=patch_size,
+                                            scoreType=cv2.ORB_FAST_SCORE)
         else:
             self.extractor = None
     
@@ -36,10 +40,15 @@ class FeatureExtractor():
         for width_cell_idx in range(width_div):
             for height_cell_idx in range(height_div):
                 # Get cell coordinates
+                # Add patch size overlap to avoid extractor boarders inside of the image
                 start_x = width_step*width_cell_idx
-                end_x = width_step*(width_cell_idx+1)
+                end_x = width_step*(width_cell_idx+1)+self.patch_size
                 start_y = height_step*height_cell_idx
-                end_y = height_step*(height_cell_idx+1)
+                end_y = height_step*(height_cell_idx+1)+self.patch_size
+
+                # Make sure that the last cell is not out of bounds
+                end_x = min(end_x, frame.shape[1])
+                end_y = min(end_y, frame.shape[0])
 
                 # Extract a cell
                 image_cell = frame[start_y:end_y, start_x:end_x, :].copy()
