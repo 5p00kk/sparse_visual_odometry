@@ -1,10 +1,12 @@
 from frame_loader import FrameLoader
 from odometry import FeatureExtractor
+from odometry import Odometry
 from visualizator import Visualizator
 
 # Declarations
 frame_loader = FrameLoader("data/video.mp4")
 extractor = FeatureExtractor("orb")
+visual_odometry = Odometry()
 visualizator = Visualizator()
 frame_read = True
 

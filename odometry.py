@@ -68,7 +68,11 @@ class FeatureExtractor():
 
 class Odometry():
     def __init__(self):
-        pass
+        self.matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+
+    def match_features(self, des_left, des_right):
+        matches = self.matcher.match(des_left, des_right)
+        return matches
 
     def do_odometry(self, kp_pairs):
         pass
