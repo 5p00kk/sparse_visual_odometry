@@ -22,5 +22,6 @@ while frame_read:
     # Printouts
     print("Captured frame: %d" % frame_loader.frame_num)
     print("Frame shape: %s" % (frame.shape,))
+    print("Extracted keypoints: %d" % len(kp))
 
 frame_loader.close()
